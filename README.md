@@ -124,12 +124,7 @@ To run the project, execute the following command:
 
 <!-- AUTHORS -->
 
-## 👥 Authors <a name="authors"></a>
-
-👤 **Onate Makoji**
-
-- GitHub: [@acedavon](https://github.com/acedavon)
-
+## 👥 Author <a name="author"></a>
 
 👤 **Milen Alebel**
 
