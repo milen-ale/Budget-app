@@ -12,6 +12,7 @@ class BudgetCategoriesController < ApplicationController
   # GET /budget_categories/new
   def new
     @budget_category = BudgetCategory.new
+    @icons = icons
   end
 
   # GET /budget_categories/1/edit
