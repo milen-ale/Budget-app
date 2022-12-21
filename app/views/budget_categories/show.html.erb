@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @budget_category %>
+
+<div>
+  <%# link_to "Edit this budget category", edit_budget_category_path(@budget_category) %> |
+  <%= link_to "Back to budget categories", budget_categories_path %>
+
+  <%= button_to "Destroy this budget category", @budget_category, method: :delete %>
+</div>

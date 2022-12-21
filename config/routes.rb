@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  unauthenticated do
+    root "home#index"
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+
+  root 'budget_categories#index', as: "categorytrack"
+
   resources :users
+
+  resources :budget_categories, only: [:index, :show, :new, :create, :destroy] do
+    resources :expenses, only: [ :new, :show, :create, :destroy]
+  end
 end
