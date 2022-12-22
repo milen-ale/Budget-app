@@ -4,7 +4,7 @@
 
 <div>
   <%# link_to "Edit this budget category", edit_budget_category_path(@budget_category) %> |
-  <%= link_to "Back to budget categories", user_budget_category_path %>
-
+  <%= link_to "Back to budget categories",  new_budget_category_path %>
+  <%= link_to 'Add Transaction', new_budget_category_expense_path(@budget_category) %>
   <%= button_to "Destroy this budget category", @budget_category, method: :delete %>
 </div>

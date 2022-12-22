@@ -3,16 +3,17 @@ class BudgetCategoriesController < ApplicationController
 
   # GET /budget_categories or /budget_categories.json
   def index
-    @budget_categories = BudgetCategory.all
+    @budget_categories = BudgetCategory.all.where(author_id: current_user.id)
   end
 
   # GET /budget_categories/1 or /budget_categories/1.json
-  def show; end
+  def show
+    @budget_category = BudgetCategory.includes(:expenses).find(params[:id])
+  end
 
   # GET /budget_categories/new
   def new
     @budget_category = BudgetCategory.new
-    @icons = icons
   end
 
   # GET /budget_categories/1/edit

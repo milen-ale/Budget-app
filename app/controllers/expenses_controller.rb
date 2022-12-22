@@ -3,6 +3,7 @@ class ExpensesController < ApplicationController
 
   # GET /expenses or /expenses.json
   def index
+    @budget_category = BudgetCategory.find(params[:budget_category_id])
     @expenses = Expense.all
   end
 
@@ -11,6 +12,8 @@ class ExpensesController < ApplicationController
 
   # GET /expenses/new
   def new
+    @budget_categories = BudgetCategory.all.where(author_id: current_user.id)
+    @budget_category = BudgetCategory.find(params[:budget_category_id])
     @expense = Expense.new
   end
 
@@ -19,11 +22,13 @@ class ExpensesController < ApplicationController
 
   # POST /expenses or /expenses.json
   def create
+    @budget_category = BudgetCategory.find(params[:budget_category_id])
     @expense = Expense.new(expense_params)
-
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to expense_url(@expense), notice: 'Expense was successfully created.' }
+        format.html do
+          redirect_to budget_category_expenses_path(@budget_category), notice: 'Expense was successfully created.'
+        end
         format.json { render :show, status: :created, location: @expense }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,6 +69,6 @@ class ExpensesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def expense_params
-    params.require(:expense).permit(:name, :amount, :author)
+    params.require(:expense).permit(:name, :amount, :author_id)
   end
 end
