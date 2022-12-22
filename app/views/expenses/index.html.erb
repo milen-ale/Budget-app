@@ -1,14 +1,11 @@
 <p style="color: green"><%= notice %></p>
+ 
+<%= link_to 'Back', budget_categories_path %>
 
 <h1>Transactions</h1>
 
+<p> Transactions Total: <%= @total %> <p/>
 <div id="expenses">
-  <% @expenses.each do |expense| %>
-    <%= render expense %>
-    <p>
-      <%= link_to "Show this expense", budget_category_expenses_path %>
-    </p>
-  <% end %>
+  <%= render  @expenses %>
 </div>
-
-<%= link_to "New expense", new_budget_category_expense_path %>
+<%= link_to "Add New Transaction", new_budget_category_expense_path %>

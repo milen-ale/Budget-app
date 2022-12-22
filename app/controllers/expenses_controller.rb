@@ -1,14 +1,18 @@
 class ExpensesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_expense, only: %i[show edit update destroy]
 
   # GET /expenses or /expenses.json
   def index
     @budget_category = BudgetCategory.find(params[:budget_category_id])
-    @expenses = Expense.all
+    @expenses = @budget_category.expenses.order('created_at desc')
+    @total = @expenses.sum(:amount)
   end
 
   # GET /expenses/1 or /expenses/1.json
-  def show; end
+  def show
+    @budget_category = BudgetCategory.find(params[:budget_category_id])
+  end
 
   # GET /expenses/new
   def new
@@ -26,6 +30,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.new(expense_params)
     respond_to do |format|
       if @expense.save
+        BudgetCategoryExpense.create({ expense_id: @expense.id, budget_category_id: @budget_category.id })
         format.html do
           redirect_to budget_category_expenses_path(@budget_category), notice: 'Expense was successfully created.'
         end
@@ -55,7 +60,7 @@ class ExpensesController < ApplicationController
     @expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to expenses_url, notice: 'Expense was successfully destroyed.' }
+      format.format.html { redirect_to expenses_url, notice: 'Expense was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +74,6 @@ class ExpensesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def expense_params
-    params.require(:expense).permit(:name, :amount, :author_id)
+    params.require(:expense).permit(:name, :amount, :author_id, budget_category_ids: [])
   end
 end
