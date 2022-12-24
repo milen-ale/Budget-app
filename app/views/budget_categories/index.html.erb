@@ -1,6 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<section class "categories">
 
-<h1>Budget Categories</h1>
+<h1 class="h11">Budget Categories</h1>
 
 <div id="budget_categories">
   <% @budget_categories.each do |budget_category| %>
@@ -8,4 +8,7 @@
    <% end %>
 </div>
 
+<div class="new-category">
 <%= link_to "Add New Category",  new_budget_category_path %>
+</div>
+</section>

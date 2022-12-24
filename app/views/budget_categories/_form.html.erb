@@ -18,10 +18,10 @@
 
   <div>
     <%= form.label :icon, style: "display: block" %>
-    <%= form.text_field :icon %>
+    <%= form.text_field :icon, placeholder: "Use image url link" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%=form.submit "Submit", class: "devise--2" %>
   </div>
 <% end %>

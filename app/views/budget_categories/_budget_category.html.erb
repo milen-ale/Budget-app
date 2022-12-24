@@ -1,10 +1,17 @@
-<div id="<%= dom_id budget_category %>">
-<p>
-<%= link_to budget_category.name, budget_category_expenses_path(budget_category) %>
-</p>
- <p>
-    <strong>Icon:</strong>
-    <%= budget_category.icon %>
-  </p>
+<div id="<%= dom_id budget_category %>" class= "budget_category" >
+<div class="category-main">
+<div class="category">
+  <img  src ="  <%= budget_category.icon %>" > </img>
+  <div class="total_item">
+    <p>
+      <%= link_to budget_category.name, budget_category_expenses_path(budget_category), class: "para-g" %>
+    </p>
 
+  <p class="total">
+    $<%= budget_category.total%>
+  </p>
+  </div>
+  </div>
+
+</div>
 </div>
