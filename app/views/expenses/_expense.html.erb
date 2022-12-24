@@ -1,17 +1,13 @@
 <div id="<%= dom_id expense %>">
-  <p>
-    <strong>Name:</strong>
-    <%= expense.name %>
-  </p>
+ 
+<p>
+<%= link_to expense.name, budget_category_expense_path(@budget_category, expense) %>
+</p>
 
   <p>
     <strong>Amount:</strong>
     <%= expense.amount %>
   </p>
 
-  <p>
-    <strong>Author:</strong>
-    <%= expense.author %>
-  </p>
 
 </div>

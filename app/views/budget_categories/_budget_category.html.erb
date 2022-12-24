@@ -1,10 +1,8 @@
 <div id="<%= dom_id budget_category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= budget_category.name %>
-  </p>
-
-  <p>
+<p>
+<%= link_to budget_category.name, budget_category_expenses_path(budget_category) %>
+</p>
+ <p>
     <strong>Icon:</strong>
     <%= budget_category.icon %>
   </p>
