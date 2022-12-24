@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Budget categories</h1>
+
+<div id="budget_categories">
+  <% @budget_categories.each do |budget_category| %>
+    <%= render budget_category %>
+    <p>
+      <%= link_to "Show this budget category",categorytrack_path %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New budget category", categorytrack_path %>

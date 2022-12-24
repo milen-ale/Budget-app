@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice%> </p>
+    <p class="alert"><%= alert%> </p>
+    <% if user_signed_in? %>
+    <header>
+      <p>Welcome,<b> <%= current_user.name %></b></p>
+      <%= button_to 'Log out', destroy_user_session_path, method: :delete %>
+    </header>
+    <% end %>
     <%= yield %>
   </body>
 </html>
