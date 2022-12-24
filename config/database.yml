@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: budget-app
+  database: budget_app
   pool: 5
   host: localhost
   username: postgres
@@ -10,7 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: budget-app
+  database: budget_app
   pool: 5
   username: postgres
   password: welcome@2022
