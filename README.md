@@ -85,7 +85,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- in progress :smile: [Live Demo Link](https://yourdeployedapplicationlink.com)
+- in progress :smile: [Live Demo Link](https://budget-app-fz3u.onrender.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
