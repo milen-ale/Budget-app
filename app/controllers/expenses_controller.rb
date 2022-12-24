@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
   # GET /expenses or /expenses.json
   def index
     @budget_category = BudgetCategory.find(params[:budget_category_id])
-    @expenses = @budget_category.expenses.order('created_at desc')
+    @expenses = @budget_category.expenses.order('created_at DESC')
     @total = @expenses.sum(:amount)
   end
 
@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
       if @expense.save
         BudgetCategoryExpense.create({ expense_id: @expense.id, budget_category_id: @budget_category.id })
         format.html do
-          redirect_to budget_category_expenses_path(@budget_category), notice: 'Expense was successfully created.'
+          redirect_to budget_category_expenses_path(@budget_category), notice: 'Expense successfully created.'
         end
         format.json { render :show, status: :created, location: @expense }
       else
