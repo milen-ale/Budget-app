@@ -26,7 +26,7 @@ class BudgetCategoriesController < ApplicationController
     respond_to do |format|
       if @budget_category.save
         format.html do
-          redirect_to budget_category_url(@budget_category), notice: 'Budget category was successfully created.'
+          redirect_to categorytrack_path(@budget_category), notice: 'Budget category was successfully created.'
         end
         format.json { render :show, status: :created, location: @budget_category }
       else
