@@ -30,7 +30,6 @@ class ExpensesController < ApplicationController
     @expense = Expense.new(expense_params)
     respond_to do |format|
       if @expense.save
-        BudgetCategoryExpense.create({ expense_id: @expense.id, budget_category_id: @budget_category.id })
         format.html do
           redirect_to budget_category_expenses_path(@budget_category), notice: 'Expense successfully created.'
         end
