@@ -45,9 +45,14 @@ text-align: center;
   width: 50vw;
 }
 
-
 .categories {
   width: 100%;
+}
+
+.expense-img {
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
 }
 
 #budget_categories {
@@ -71,7 +76,7 @@ text-align: center;
 
 .category {
   padding: 1em;
-  width: 80vw;
+  width: 90vw;
   border-radius: 8px;
   background: #fff;
   font-size: 2em;
@@ -130,7 +135,7 @@ margin-top: 1rem;
 .new-category {
 font-size: 1.5rem;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-background-color: #3778c2;
+background-color: #37c247;
 color: #fff;
 height: 3rem;
 text-align: center;
@@ -165,12 +170,18 @@ bottom: 0;
 .expense {
   font-size: 2em;
   margin: auto;
+  margin-top: 1rem;
   background: #fff;
   width: 90%;
   padding: 0.5em 1em;
   border-bottom: 1px solid #bbb;
   display: flex;
   justify-content: space-between;
+  box-shadow: 8px 8px 7px 0px rgba(0,0,0,0.5);
+}
+
+.expense-info {
+  margin-top: 10px;
 }
 
 .expense:nth-child(1) {
@@ -190,22 +201,33 @@ bottom: 0;
 }
 
 .h11 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
   margin: 1rem;
+  background: #3778c2;
+  margin: 0;
+  width: 100%;
+  color: white;
+  border: none;
 } 
 
 
 .total_item {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .para-g {
   color:#3778c2;
   font-size: 1.5rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-right: 1.5rem;
+}
+
+.category-info {
+ 
 }
 
 .total-container {
@@ -233,5 +255,6 @@ bottom: 0;
 
   .auth {
     bottom: 6rem;
+    display: block;
   }
 }

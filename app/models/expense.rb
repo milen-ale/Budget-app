@@ -8,6 +8,6 @@ class Expense < ApplicationRecord
   validates :budget_categories, presence: true
 
   def time_created
-    created_at.strftime('%d %b %Y at %I:%M%P')
+    created_at.strftime('%d %b %Y ')
   end
 end

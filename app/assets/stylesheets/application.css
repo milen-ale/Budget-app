@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 html {
@@ -23,8 +24,15 @@ body {
 }
 
 header {
-  width: 100%;
   background: #3778c2;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.header-1 {
+  width: 100%;
+  border: none;
+  margin: 0;
   padding: 1em 2em;
   font-size: 1.75em;
   display: flex;

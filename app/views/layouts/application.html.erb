@@ -15,16 +15,15 @@
   </head>
 
   <body>
-  <p class="notice"><%= notice%> </p>
-<p class="alert"><%= alert%> </p>
-<% if user_signed_in? %>
-<header class="header">
-  <p>Welcome,<b> <%= current_user.name %></b></p>
-  <div>
-  <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "logout" %>
-  <div>
-</header>
+  <% if current_page?(budget_categories_path ) %>
+    <%= render 'layouts/header' %>
+<% else %>
+    <%= render 'layouts/home_header' %>
 <% end %>
+
+
+
+
     <%= yield %>
   </body>
 </html>

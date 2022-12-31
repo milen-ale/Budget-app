@@ -16,12 +16,13 @@
         <%= link_to @budget_category.name, budget_category_expenses_path(@budget_category) %>
       </p>
       <p  class = "total">
-        Total: <%= @total %>
+         $<%= @total %>
       </p>
     </div>
   <% @expenses.each do |expense|%>
     <div id="<%= dom_id expense %>" class="expense">
-      <div>
+    <img  class="expense-img" src ="  <%= @budget_category.icon %>" > </img>
+      <div class="expense-info">
         <p>
           <%= expense.name %>
         </p>
@@ -31,8 +32,8 @@
         </p>
       </div>
     
-      <p class ="amount">
-        $<%= expense.amount %>
+      <p class ="amount expense-info">
+        <strong>$<%= expense.amount %></strong>
       </p>
     </div>  
   <% end %>
