@@ -28,11 +28,6 @@ RSpec.describe 'BudgetCategories#index', type: :feature do
     end
   end
 
-  it 'Log\'s current user out' do
-    click_button 'Log out'
-    expect(current_path).to match root_path
-  end
-
   it 'Redirects to add new transaction page' do
     click_link 'Add New Transaction'
     expect(current_path).to match new_budget_category_expense_path(@budget_category1)
