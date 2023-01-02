@@ -15,22 +15,19 @@
 .header {
   background: #3778c2;
   color: #fff;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .h22 {
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2rem;
-  margin-top:4rem;
+  margin-top: 4rem;
 }
 
 .header svg {
   width: 30px;
   color: #fff;
+  margin-left: 1rem;
 }
 
 .header svg path {
@@ -88,9 +85,7 @@ a {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.expense
-
-.actions {
+.expense .actions {
   margin-top: 1em;
   padding: 1em;
   width: 100%;
@@ -98,11 +93,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .header-details {
   display: flex;
+  justify-content: space-between;
   font-size: 1.5em;
 }
 
