@@ -57,8 +57,6 @@ header {
   border: none;
   margin-top: 1rem;
   border-radius: 4px;
-  position: fixed;
-  right: 1rem;
 }
 
 .text-light {

@@ -1,16 +1,17 @@
-/* header {
-  position:fixed;
-  top: 0;
-  width: 100vw;
-  height: 4rem;
-} */
-
 .header-top {
   display: flex;
 }
 
 #menu.active {
   display: block;
+}
+
+.splash-screen {
+  background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+  height: 100vh;
+  width: 100vw;
+
+  /* font-size: 2em; */
 }
 
 .splash-screen a:hover {
@@ -29,7 +30,6 @@
 }
 
 #menu-toggle {
-  display: none;
   margin-left: 2rem;
   padding-top: 1rem;
   font-size: 2rem;
@@ -178,6 +178,10 @@
   width: 80px;
   height: 80px;
   margin-right: 1rem;
+}
+
+.category-info {
+  display: block;
 }
 
 #budget_categories {
