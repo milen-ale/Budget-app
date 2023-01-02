@@ -1,0 +1,44 @@
+<section>
+  <p style="color: green">
+
+    <div class="header header-details">
+      <%= link_to budget_categories_path do %>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"/></svg>
+      <% end %>
+      <h2 class= "h2-expense">Expense</h2>
+    </div>
+        
+  </p>
+  <div class="category-main">
+    <div class="category-expense">
+      <img  src ="  <%= @budget_category.icon %>" > </img>
+      <p>
+        <%= link_to @budget_category.name, budget_category_expenses_path(@budget_category) %>
+      </p>
+      <p  class = "total">
+         $<%= @total %>
+      </p>
+    </div>
+  <% @expenses.each do |expense|%>
+    <div id="<%= dom_id expense %>" class="expense">
+    <img  class="expense-img" src ="  <%= @budget_category.icon %>" > </img>
+      <div class="expense-info">
+        <p>
+          <%= expense.name %>
+        </p>
+        <p class="date">
+          <i class="fa-regular fa-calendar"></i>
+            <%= expense.time_created %>
+        </p>
+      </div>
+    
+      <p class ="amount expense-info">
+        <strong>$<%= expense.amount %></strong>
+      </p>
+    </div>  
+  <% end %>
+
+  <div class="new-category">
+    <%= link_to "Add New Transaction", new_budget_category_expense_path(@budget_category) %>
+  </div>
+</section>

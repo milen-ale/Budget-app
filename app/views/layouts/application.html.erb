@@ -1,15 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
+</nav>
     <title>BudgetApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+     <%= stylesheet_link_tag "form", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "main", "data-turbo-track": "reload" %>
+    <script src="https://kit.fontawesome.com/f0e9415ee2.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
+<% if user_signed_in? %>
+<header class="header">
+<div class="header-top">
+<i id="menu-toggle" class="fas fa-bars"></i>
+<div class = "nav-fix"> </div>
+<div class="desktop-nav">
+<ul  class = "desktop-ul">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+    <li><%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "logout-desktop" %></li>
+  </ul>
+</div>
+<div class="logout-div"><%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "logout" %></div>
+</div>
+
+<nav id="menu">
+<i id="menu-close" class="fa fa-window-close" aria-hidden="true"></i>
+<ul>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+    <li><%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "logout-menu" %></li>
+  </ul>
+</nav>
+<% if current_page?(budget_categories_path ) %>
+    <%= render 'layouts/header' %>
+<% else %>
+    <%= render 'layouts/home_header' %>
+<% end %>
+</header>
+<% end %>
+
     <%= yield %>
+    <script>
+    const hamburger = document.querySelector('#menu-toggle')
+    const menu = document.getElementById('menu')
+     const close = document.getElementById('menu-close')
+    hamburger.addEventListener('click', ()=> {
+     console.log('clicked')
+     menu.classList.toggle('active');
+     hamburger.classList.toggle('active');
+    } )
+    close.addEventListener('click', ()=> {
+     console.log('clicked')
+     menu.classList.remove("active")
+    } )
+    </script>
   </body>
-</html>
+  </html>

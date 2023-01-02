@@ -1,0 +1,40 @@
+<%= form_with model: @expense, url: budget_category_expenses_path(@budget_category) do |form| %>
+  <div class="d-flex menu justify-content-between top p-2">
+    <%= link_to root_path, class: 'text-light h1' do %>
+        <i class="bi bi-arrow-left"></i>
+    <% end %>
+    </div>
+<div>
+  <%= form.hidden_field :author_id, value: current_user.id %>
+</div>
+<div class = "text_filed">
+  <div >
+    <%= form.text_field :name, placeholder: :name %>
+  </div>
+
+  <div>
+    <%= form.text_field :amount, placeholder: :amount %>
+  </div>
+  </div>
+
+  <div class="collection">
+    <%= form.label :choose_category %>
+     <%= form.collection_check_boxes :budget_category_ids, BudgetCategory.all.where(author: current_user), :id, :name, { hide_label: true } %>
+  </div>
+
+  <% if expense.errors.any? %>
+    <div style="color: red" id="error_explanation">
+      <h2><%= pluralize(expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+
+      <ul>
+        <% expense.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions--1">
+    <%= form.submit 'SAVE', class: "expense_btn",  disable_with: "Submitting..." %>
+  </div>
+<% end %>

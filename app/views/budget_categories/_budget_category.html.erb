@@ -1,0 +1,24 @@
+<div id="<%= dom_id budget_category %>" class= "budget_category" >
+<div class="category-main">
+<div class="category">
+  <img  src ="  <%= budget_category.icon %>" > </img>
+  <div class="category-info">
+    <p>
+      <%= link_to budget_category.name, budget_category_expenses_path(budget_category), class: "para-g" %>
+    </p>
+
+    <p class="date">
+    <i class="fa-regular fa-calendar"></i>
+    <%= budget_category. created_at.strftime('%d %b %Y ')%>
+  </p>
+  </div>
+  <div class="total_item">
+   
+  <p class="total">
+    $<%= budget_category.total%>
+  </p>
+  </div>
+  </div>
+
+</div>
+</div>
