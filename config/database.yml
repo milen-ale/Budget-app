@@ -1,19 +1,18 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  host: <%= ENV.fetch('PGHOST', 'localhost') %>
+  username: <%= ENV.fetch('PGUSER', 'postgres') %>
+  password: <%= ENV.fetch('PGPASSWORD', 'welcome@2022') %>
+
+development:
+  <<: *default
   database: budget-app
-  pool: 5
-  host: localhost
-  username: postgres
-  password: welcome@2022
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: budget-app
-  pool: 5
-  username: postgres
-  password: welcome@2022
+  <<: *default
+  database: budget-app-test
 
 staging:
   url: <%= ENV['DATABASE_URL'] %>
