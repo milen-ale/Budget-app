@@ -1,0 +1,8 @@
+<div class="empty-state">
+  <span class="empty-state__emoji" aria-hidden="true"><%= emoji %></span>
+  <h2 class="empty-state__title"><%= title %></h2>
+  <p class="empty-state__body"><%= body %></p>
+  <% if defined?(cta_path) && cta_path.present? %>
+    <%= link_to cta_text, cta_path, class: "btn btn--primary" %>
+  <% end %>
+</div>

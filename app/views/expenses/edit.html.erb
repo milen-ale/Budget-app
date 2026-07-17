@@ -1,10 +1,22 @@
-<h1>Editing expense</h1>
+<% content_for :title, "Edit expense · Budget App" %>
 
-<%= render "form", expense: @expense %>
+<section class="narrow">
+  <div class="page-head">
+    <div class="page-head__title-group">
+      <%= category_icon(@budget_category.icon) %>
+      <div>
+        <h1 class="page-head__title">Edit expense</h1>
+        <p class="page-head__subtitle">in <%= @budget_category.name %></p>
+      </div>
+    </div>
+  </div>
+  <div class="card card--padded">
+    <%= render "form", expense: @expense %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this expense", @expense %> |
-  <%= link_to "Back to expenses", expenses_path %>
-</div>
+  <div class="danger-zone">
+    <%= button_to "Delete expense", budget_category_expense_path(@budget_category, @expense), method: :delete,
+                  class: "btn btn--danger",
+                  form: { data: { turbo_confirm: "Delete #{@expense.name}?" } } %>
+  </div>
+</section>

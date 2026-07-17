@@ -1,24 +1,10 @@
-<div id="<%= dom_id budget_category %>" class= "budget_category" >
-<div class="category-main">
-<div class="category">
-  <img  src ="  <%= budget_category.icon %>" > </img>
-  <div class="category-info">
-    <p>
-      <%= link_to budget_category.name, budget_category_expenses_path(budget_category), class: "para-g" %>
-    </p>
-
-    <p class="date">
-    <i class="fa-regular fa-calendar"></i>
-    <%= budget_category. created_at.strftime('%d %b %Y ')%>
-  </p>
-  </div>
-  <div class="total_item">
-   
-  <p class="total">
-    $<%= budget_category.total%>
-  </p>
-  </div>
-  </div>
-
-</div>
-</div>
+<article id="<%= dom_id(budget_category) %>" class="card category-card">
+  <%= link_to budget_category_expenses_path(budget_category), class: "category-card__link" do %>
+    <%= category_icon(budget_category.icon) %>
+    <span class="category-card__info">
+      <span class="category-card__name"><%= budget_category.name %></span>
+      <span class="category-card__meta"><%= pluralize(budget_category.expense_count, 'expense') %></span>
+    </span>
+    <span class="category-card__total"><%= number_to_currency(budget_category.total) %></span>
+  <% end %>
+</article>

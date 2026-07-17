@@ -1,12 +1,48 @@
-<section class "categories">
+<% content_for :title, "Categories · Budget App" %>
 
-<div id="budget_categories">
-  <% @budget_categories.each do |budget_category| %>
-    <%= render budget_category %>
-   <% end %>
-</div>
+<section class="dashboard">
+  <div class="page-head">
+    <div>
+      <h1 class="page-head__title">Hi, <%= current_user.name %> 👋</h1>
+      <p class="page-head__subtitle">Here's where your money is going.</p>
+    </div>
+    <%= link_to "＋ New category", new_budget_category_path, class: "btn btn--primary" %>
+  </div>
 
-<div class="new-category">
-<%= link_to "Add New Category",  new_budget_category_path %>
-</div>
+  <div class="stat-tile">
+    <p class="stat-tile__label">Total spent</p>
+    <p class="stat-tile__value"><%= number_to_currency(@total_spent) %></p>
+  </div>
+
+  <% if @budget_categories.any? %>
+    <% chart_rows = @budget_categories.select { |c| c.total.positive? }.sort_by { |c| -c.total } %>
+    <% if chart_rows.any? %>
+      <section class="card chart" aria-label="Spending by category">
+        <h2 class="card__title">Spending by category</h2>
+        <% max = chart_rows.first.total %>
+        <ul class="chart__rows">
+          <% chart_rows.each do |category| %>
+            <li class="chart__row" title="<%= category.name %>: <%= number_to_currency(category.total) %>">
+              <span class="chart__label"><%= category.name %></span>
+              <span class="chart__track">
+                <span class="chart__bar" style="width: <%= (category.total / max * 100).round(1) %>%"></span>
+              </span>
+              <span class="chart__value"><%= number_to_currency(category.total) %></span>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+
+    <div class="category-grid">
+      <%= render @budget_categories %>
+    </div>
+  <% else %>
+    <%= render "shared/empty_state",
+               emoji: "🗂️",
+               title: "No categories yet",
+               body: "Group your spending into categories like Food or Transport, then log expenses against them.",
+               cta_text: "Create your first category",
+               cta_path: new_budget_category_path %>
+  <% end %>
 </section>

@@ -1,12 +1,16 @@
-<section class="devise-forms">
-<div class="header header-details">
-    <%= link_to budget_category_expenses_path(@budget_category) do %>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"/></svg>
-    <% end %>
-    <p>NEW EXPENSE</p>
+<% content_for :title, "Add expense · Budget App" %>
+
+<section class="narrow">
+  <div class="page-head">
+    <div class="page-head__title-group">
+      <%= category_icon(@budget_category.icon) %>
+      <div>
+        <h1 class="page-head__title">Add expense</h1>
+        <p class="page-head__subtitle">to <%= @budget_category.name %></p>
+      </div>
+    </div>
   </div>
-
-  <%= render "form", expense: @expense %>
-
-  <br>
+  <div class="card card--padded">
+    <%= render "form", expense: @expense %>
+  </div>
 </section>

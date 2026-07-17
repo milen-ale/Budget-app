@@ -1,27 +1,27 @@
-<%= form_with model: budget_category, url: budget_categories_path do |form| %>
-  <% if budget_category.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(budget_category.errors.count, "error") %> prohibited this budget_category from being saved:</h2>
+<%= form_with model: budget_category, class: "form" do |form| %>
+  <%= render "shared/form_errors", record: budget_category %>
 
-      <ul>
-        <% budget_category.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="form__field">
+    <%= form.label :name, class: "form__label" %>
+    <%= form.text_field :name, class: "form__input", placeholder: "e.g. Groceries",
+                        maxlength: 60, autofocus: budget_category.new_record? %>
+  </div>
+
+  <fieldset class="form__field">
+    <legend class="form__label">Icon</legend>
+    <div class="icon-picker">
+      <% BudgetCategory::ICONS.each do |icon| %>
+        <label class="icon-picker__option">
+          <%= form.radio_button :icon, icon %>
+          <%= category_icon(icon, size: :lg) %>
+          <span class="icon-picker__caption"><%= icon.capitalize %></span>
+        </label>
+      <% end %>
     </div>
-  <% end %>
+  </fieldset>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :icon, style: "display: block" %>
-    <%= form.text_field :icon, placeholder: "Use image url link" %>
-  </div>
-
-  <div>
-    <%=form.submit "Submit", class: "devise--2",  disable_with: "Submitting..." %>
+  <div class="form__actions">
+    <%= form.submit budget_category.persisted? ? "Save changes" : "Create category", class: "btn btn--primary" %>
+    <%= link_to "Cancel", budget_categories_path, class: "btn btn--ghost" %>
   </div>
 <% end %>

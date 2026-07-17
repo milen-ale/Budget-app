@@ -1,0 +1,29 @@
+<header class="navbar" data-controller="menu">
+  <div class="navbar__inner">
+    <%= link_to budget_categories_path, class: "navbar__brand" do %>
+      <span class="navbar__brand-mark" aria-hidden="true">💸</span>
+      <span>Budget App</span>
+    <% end %>
+
+    <nav class="navbar__links" aria-label="Primary">
+      <%= link_to "Categories", budget_categories_path, class: "navbar__link" %>
+      <%= link_to "Profile", edit_user_registration_path, class: "navbar__link" %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "navbar__link navbar__link--button" %>
+    </nav>
+
+    <button type="button" class="navbar__toggle" data-action="menu#toggle" data-menu-target="toggle"
+            aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="6" x2="20" y2="6"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="18" x2="20" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="navbar__drawer" data-menu-target="drawer" hidden aria-label="Mobile">
+    <%= link_to "Categories", budget_categories_path, class: "navbar__drawer-link", data: { action: "menu#close" } %>
+    <%= link_to "Profile", edit_user_registration_path, class: "navbar__drawer-link", data: { action: "menu#close" } %>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "navbar__drawer-link navbar__drawer-link--button" %>
+  </nav>
+</header>
