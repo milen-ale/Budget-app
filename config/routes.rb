@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
-  unauthenticated do
-    root 'splash_screen#index'
+  devise_for :users
+
+  authenticated :user do
+    root 'budget_categories#index', as: :authenticated_root
   end
 
-   devise_for :users
-   
-   root 'budget_categories#index', as: "categorytrack"
-  resources :users
+  root 'splash_screen#index'
 
-  resources :budget_categories do
-    resources :expenses
+  resources :budget_categories, except: :show do
+    resources :expenses, except: :show
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
- 
 end
