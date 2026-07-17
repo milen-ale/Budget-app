@@ -10,35 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_21_172521) do
+ActiveRecord::Schema[7.0].define(version: 2026_07_17_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "budget_categories", force: :cascade do |t|
-    t.string "name"
-    t.string "icon"
+    t.string "name", null: false
+    t.string "icon", null: false
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id", "name"], name: "index_budget_categories_on_author_id_and_name", unique: true
     t.index ["author_id"], name: "index_budget_categories_on_author_id"
   end
 
-  create_table "budget_category_expenses", force: :cascade do |t|
-    t.bigint "budget_category_id", null: false
-    t.bigint "expense_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["budget_category_id"], name: "index_budget_category_expenses_on_budget_category_id"
-    t.index ["expense_id"], name: "index_budget_category_expenses_on_expense_id"
-  end
-
   create_table "expenses", force: :cascade do |t|
-    t.string "name"
-    t.float "amount"
+    t.string "name", null: false
+    t.decimal "amount", precision: 12, scale: 2, null: false
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "budget_category_id", null: false
     t.index ["author_id"], name: "index_expenses_on_author_id"
+    t.index ["budget_category_id", "created_at"], name: "index_expenses_on_budget_category_id_and_created_at"
+    t.index ["budget_category_id"], name: "index_expenses_on_budget_category_id"
+    t.check_constraint "amount >= 0::numeric", name: "expenses_amount_nonnegative"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_172521) do
   end
 
   add_foreign_key "budget_categories", "users", column: "author_id"
-  add_foreign_key "budget_category_expenses", "budget_categories"
-  add_foreign_key "budget_category_expenses", "expenses"
+  add_foreign_key "expenses", "budget_categories"
   add_foreign_key "expenses", "users", column: "author_id"
 end
