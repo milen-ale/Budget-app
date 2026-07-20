@@ -36,6 +36,12 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
+  # Keep the sprockets cache in memory so test runs never contend with a
+  # running dev server over tmp/cache/assets file locks (Windows).
+  config.assets.configure do |env|
+    env.cache = Sprockets::Cache::MemoryStore.new(4096)
+  end
+
   config.action_mailer.perform_caching = false
 
   # Tell Action Mailer not to deliver emails to the real world.

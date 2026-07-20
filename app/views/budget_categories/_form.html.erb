@@ -1,0 +1,27 @@
+<%= form_with model: budget_category, class: "form" do |form| %>
+  <%= render "shared/form_errors", record: budget_category %>
+
+  <div class="form__field">
+    <%= form.label :name, class: "form__label" %>
+    <%= form.text_field :name, class: "form__input", placeholder: "e.g. Groceries",
+                        maxlength: 60, autofocus: budget_category.new_record? %>
+  </div>
+
+  <fieldset class="form__field">
+    <legend class="form__label">Icon</legend>
+    <div class="icon-picker">
+      <% BudgetCategory::ICONS.each do |icon| %>
+        <label class="icon-picker__option">
+          <%= form.radio_button :icon, icon %>
+          <%= category_icon(icon, size: :lg) %>
+          <span class="icon-picker__caption"><%= icon.capitalize %></span>
+        </label>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <div class="form__actions">
+    <%= form.submit budget_category.persisted? ? "Save changes" : "Create category", class: "btn btn--primary" %>
+    <%= link_to "Cancel", budget_categories_path, class: "btn btn--ghost" %>
+  </div>
+<% end %>

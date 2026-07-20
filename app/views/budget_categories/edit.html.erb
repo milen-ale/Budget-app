@@ -1,0 +1,17 @@
+<% content_for :title, "Edit #{@budget_category.name} · Budget App" %>
+
+<section class="narrow">
+  <div class="page-head">
+    <h1 class="page-head__title">Edit category</h1>
+  </div>
+  <div class="card card--padded">
+    <%= render "form", budget_category: @budget_category %>
+  </div>
+
+  <div class="danger-zone">
+    <p class="danger-zone__text">Deleting this category also deletes all of its expenses.</p>
+    <%= button_to "Delete category", budget_category_path(@budget_category), method: :delete,
+                  class: "btn btn--danger",
+                  form: { data: { turbo_confirm: "Delete #{@budget_category.name} and all of its expenses?" } } %>
+  </div>
+</section>

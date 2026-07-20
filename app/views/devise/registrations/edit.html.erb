@@ -1,0 +1,46 @@
+<% content_for :title, "Profile · Budget App" %>
+
+<section class="narrow">
+  <div class="page-head">
+    <h1 class="page-head__title">Your profile</h1>
+  </div>
+
+  <div class="card card--padded">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+                 html: { method: :put, class: "form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="form__field">
+        <%= f.label :name, class: "form__label" %>
+        <%= f.text_field :name, autocomplete: "name", class: "form__input" %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :email, class: "form__label" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form__input" %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :password, "New password", class: "form__label" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form__input" %>
+        <p class="form__hint">Leave blank to keep your current password<%= " (#{@minimum_password_length} characters minimum)" if @minimum_password_length %>.</p>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :password_confirmation, class: "form__label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form__input" %>
+      </div>
+
+      <div class="form__field">
+        <%= f.label :current_password, class: "form__label" %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form__input" %>
+        <p class="form__hint">We need your current password to confirm changes.</p>
+      </div>
+
+      <div class="form__actions">
+        <%= f.submit "Save changes", class: "btn btn--primary" %>
+        <%= link_to "Cancel", budget_categories_path, class: "btn btn--ghost" %>
+      </div>
+    <% end %>
+  </div>
+</section>

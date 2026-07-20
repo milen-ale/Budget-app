@@ -1,0 +1,23 @@
+<%= form_with model: [@budget_category, expense], class: "form" do |form| %>
+  <%= render "shared/form_errors", record: expense %>
+
+  <div class="form__field">
+    <%= form.label :name, class: "form__label" %>
+    <%= form.text_field :name, class: "form__input", placeholder: "e.g. Weekly shop",
+                        maxlength: 60, autofocus: expense.new_record? %>
+  </div>
+
+  <div class="form__field">
+    <%= form.label :amount, class: "form__label" %>
+    <div class="form__input-group">
+      <span class="form__input-prefix" aria-hidden="true">$</span>
+      <%= form.number_field :amount, class: "form__input form__input--prefixed",
+                            step: "0.01", min: "0.01", placeholder: "0.00", inputmode: "decimal" %>
+    </div>
+  </div>
+
+  <div class="form__actions">
+    <%= form.submit expense.persisted? ? "Save changes" : "Add expense", class: "btn btn--primary" %>
+    <%= link_to "Cancel", budget_category_expenses_path(@budget_category), class: "btn btn--ghost" %>
+  </div>
+<% end %>

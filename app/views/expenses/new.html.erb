@@ -1,0 +1,16 @@
+<% content_for :title, "Add expense · Budget App" %>
+
+<section class="narrow">
+  <div class="page-head">
+    <div class="page-head__title-group">
+      <%= category_icon(@budget_category.icon) %>
+      <div>
+        <h1 class="page-head__title">Add expense</h1>
+        <p class="page-head__subtitle">to <%= @budget_category.name %></p>
+      </div>
+    </div>
+  </div>
+  <div class="card card--padded">
+    <%= render "form", expense: @expense %>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<li id="<%= dom_id(expense) %>" class="expense-row">
+  <div class="expense-row__info">
+    <p class="expense-row__name"><%= expense.name %></p>
+    <p class="expense-row__date"><%= l(expense.created_at, format: :expense_date) %></p>
+  </div>
+  <p class="expense-row__amount"><%= number_to_currency(expense.amount) %></p>
+  <%= link_to "Edit", edit_budget_category_expense_path(expense.budget_category, expense),
+              class: "btn btn--ghost btn--sm" %>
+</li>

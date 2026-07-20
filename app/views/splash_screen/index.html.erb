@@ -1,0 +1,15 @@
+<% content_for :title, "Budget App — know where your money goes" %>
+
+<section class="splash">
+  <div class="splash__card">
+    <span class="splash__mark" aria-hidden="true">💸</span>
+    <h1 class="splash__title">Budget App</h1>
+    <p class="splash__tagline">
+      Track every expense, organize them by category, and always know where your money went.
+    </p>
+    <div class="splash__actions">
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn--primary btn--lg" %>
+      <%= link_to "Log in", new_user_session_path, class: "btn btn--outline btn--lg" %>
+    </div>
+  </div>
+</section>

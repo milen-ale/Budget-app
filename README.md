@@ -1,197 +1,104 @@
-<a name="readme-top"></a>
+# 💸 Budget App
 
-<div align="center">
+A clean, mobile-first Ruby on Rails app for tracking expenses by category.
+Sign up, create spending categories with icons, log expenses against them, and
+see exactly where your money goes — including a spending-by-category breakdown.
 
-  <img src="https://user-images.githubusercontent.com/84629565/202665566-ba1a8ed3-041f-45bc-b21b-efdcc357189b.png" alt="logo" width="140"  height="auto" />
-  <br/>
+## Features
 
-</div>
+- **Authentication** with Devise (sign up, log in, password reset, profile editing)
+- **Per-user data isolation** — every query is scoped to the signed-in user
+- **Categories with a curated icon picker** (no more pasting image URLs)
+- **Expense tracking** with precise decimal money and per-category totals
+- **Dashboard** with total spent, category cards, and a spending-by-category bar chart
+- **Mobile-first responsive UI** built on a custom CSS design system (no CSS framework)
+- **Hotwire** (Turbo + Stimulus) with import maps — no Node.js build step
 
-<!-- TABLE OF CONTENTS -->
+## Tech stack
 
-# 📗 Table of Contents
+| Layer | Choice |
+|---|---|
+| Framework | Ruby on Rails 7.0 (Ruby 3.1.2) |
+| Database | PostgreSQL |
+| Auth | Devise 4.9 |
+| Frontend | Hotwire (Turbo/Stimulus), import maps, hand-rolled CSS design system |
+| Tests | RSpec, Capybara |
+| Linting | RuboCop (rails + rspec plugins) |
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-  - [:card_index: Entity Relationship Diagram](#er-diagram)
-  - [🚀 Live Demo](#live-demo)
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
-- [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ](#faq)
-- [📝 License](#license)
+## Entity relationship diagram
 
-<!-- PROJECT DESCRIPTION -->
+```mermaid
+erDiagram
+    USER ||--o{ BUDGET_CATEGORY : "has many"
+    USER ||--o{ EXPENSE : "has many"
+    BUDGET_CATEGORY ||--o{ EXPENSE : "has many"
 
-# 📖 Budget-App <a name="about-project"></a>
+    USER {
+        string name
+        string email
+        string encrypted_password
+    }
+    BUDGET_CATEGORY {
+        string name "unique per user"
+        string icon "curated icon key"
+        bigint author_id FK
+    }
+    EXPENSE {
+        string name
+        decimal amount "12,2 · >= 0"
+        bigint author_id FK
+        bigint budget_category_id FK
+    }
+```
 
-![blog-gif](https://thumbs.gfycat.com/ForkedGoldenAzurevase-size_restricted.gif)
-
-**Budget App** Budget App Ruby on Rails mobile layout project for tracking expenses for a user according to categories. This project was built to satisfy the Microverse Module 5 capstone and is MIT Licensed.
-
-## 🛠 Built With <a name="built-with"></a>
-
-### Tech Stack <a name="tech-stack"></a>
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li>HTML, CSS</li>
-    <li>JavaScript</li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li>Ruby on Rails</li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  </ul>
-</details>
-
-<!-- Features -->
-
-### Key Features <a name="key-features"></a>
-
-- **[Create and run necessary migration files]**
-- **[Match table and column names to the ERD diagram.]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ER DIAGRAM-->
-
-## :card_index: Entity Relationship Diagram <a name="er-diagram"></a>
-
-![er-diagram](https://raw.githubusercontent.com/microverseinc/curriculum-rails/main/recipe-app/images/recipe_erd_2_members.png?token=GHSAT0AAAAAABWPJ5Q7KRXIB2BDG3CLB4GCY4YIABA)
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-- in progress :smile: [Live Demo Link](https://yourdeployedapplicationlink.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- GETTING STARTED -->
-
-## 💻 Getting Started <a name="getting-started"></a>
-
-To get a local copy up and running, follow these steps.
+## Getting started
 
 ### Prerequisites
 
-In order to run this project you need:
-`Git` and `Ruby`
+- Ruby 3.1.2
+- PostgreSQL 12+ running locally
+- Bundler
 
-```
- gem install rails
-```
+### Setup
 
-### Install
+```bash
+git clone https://github.com/milen-ale/Budget-app.git
+cd Budget-app
+bundle install
 
-Install this project with:
+# Point the app at your Postgres instance (or edit config/database.yml)
+bin/rails db:create db:migrate db:seed
 
-```sh
-  bundle install
-```
-
-### Usage
-
-To run the project, execute the following command:
-
-```sh
-  rails server or rails s
+bin/rails server
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Then open http://localhost:3000.
 
-<!-- AUTHORS -->
+The seeds create a demo account: **demo@example.com** / **password123**.
 
-## 👥 Author <a name="author"></a>
+## Running tests
 
-👤 **Milen Alebel**
+```bash
+bundle exec rspec
+```
 
-- GitHub: [@milen-ale](https://github.com/milen-ale)
-- Twitter: [@milenalebel2](https://twitter.com/milenalebel2)
-- LinkedIn: [milen-alebel](https://www.linkedin.com/in/milen-alebel/)
+The suite covers models (validations, totals, ownership rules), requests
+(including authorization regression tests — users can never read or modify
+another user's data), and a full sign-up → category → expense system flow.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Linting
 
-<!-- FUTURE FEATURES -->
+```bash
+bundle exec rubocop
+```
 
-## 🔭 Future Features <a name="future-features"></a>
+## Future improvements
 
-- [ ] **[Controllers specs]**
-- [ ] **[Processing data in models]**
-- [ ] **[Views]**
+- Monthly budgets per category with progress indicators
+- Date-range filtering and monthly summaries
+- CSV export
+- Turbo Streams inline editing for expenses
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## License
 
-<!-- CONTRIBUTING -->
-
-## 🤝 Contributing <a name="contributing"></a>
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](../../issues/).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- SUPPORT -->
-
-## ⭐️ Show your support <a name="support"></a>
-
-Give a ⭐️ if you like this project!
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-I would like to thank:
-
-- [Microverse](microverse.org)
-- [behance](https://behancewww..net/gregoirevella)
-- Code Reviewers
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FAQ (optional) -->
-
-## ❓ FAQ <a name="faq"></a>
-
-- **[Question_1d]**
-
-  - [Answer_1]
-
-- **[Question_2]**
-
-  - [Answer_2]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## 📝 License <a name="license"></a>
-
-This project is [MIT](./MIT.md) licensed.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+MIT

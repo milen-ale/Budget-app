@@ -1,0 +1,12 @@
+<% if record.errors.any? %>
+  <div class="form-errors" role="alert">
+    <p class="form-errors__title">
+      <%= pluralize(record.errors.count, 'thing') %> to fix before saving:
+    </p>
+    <ul class="form-errors__list">
+      <% record.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
